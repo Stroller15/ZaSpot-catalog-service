@@ -3,11 +3,11 @@ import winston from "winston";
 const logger = winston.createLogger({
     level: "info",
     defaultMeta: {
-        serviceName: "auth-service",
+        serviceName: "catalog-service",
     },
     format: winston.format.combine(
-        winston.format.timestamp(),
-        winston.format.json(),
+        winston.format.timestamp(), 
+        winston.format.json(), 
     ),
     transports: [
         new winston.transports.File({
@@ -25,6 +25,16 @@ const logger = winston.createLogger({
         new winston.transports.Console({
             level: "info",
             silent: process.env.NODE_ENV === "test",
+            format: winston.format.combine(
+                winston.format.colorize(), 
+                winston.format.printf(
+                    ({ level, message, timestamp, serviceName }) => {
+                        return `${timestamp} [${
+                            serviceName || "unknown-service"
+                        }] ${level}: ${message}`;
+                    },
+                ),
+            ),
         }),
     ],
 });
