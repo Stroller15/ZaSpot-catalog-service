@@ -1,7 +1,7 @@
 {
     "name": "catolog-service",
     "version": "1.0.0",
-    "description": "A user management service",
+    "description": "A catalog service for product",
     "main": "index.js",
     "scripts": {
         "dev": "cross-env NODE_ENV=development nodemon src/server.ts",
