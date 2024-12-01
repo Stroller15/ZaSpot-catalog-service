@@ -1,10 +1,15 @@
 import Router from "express";
 import { CategoryController } from "./category.controller";
 import categoryValidator from "./dto/category.validator";
+import { CategoryService } from "./category.service";
+import logger from "../../config/logger";
 
-const categoryController = new CategoryController();
 const router = Router();
 
-router.get("/", categoryValidator, categoryController.create);
+const categoryService = new CategoryService();
+
+const categoryController = new CategoryController(categoryService, logger);
+
+router.post("/", categoryValidator, categoryController.create);
 
 export default router;
